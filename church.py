@@ -90,6 +90,33 @@ ctx.set_line_width(2)
 ctx.set_source_rgb(0, 0, 0)  # Outline color
 ctx.stroke()
 
+# trapezium begins here
+# Set the color for the trapezium (black)
+ctx.set_source_rgb(0, 0, 0)
+
+# Define the trapezium points (shorter base on top, longer base at the bottom)
+top_base_width = 1000
+bottom_base_width = 1300
+height_of_trapezium = 100
+
+# Coordinates for the trapezium
+top_left_x = (width - top_base_width) / 2
+top_left_y = 980  # Space from the top
+
+bottom_left_x = (width - bottom_base_width) / 2
+bottom_left_y = top_left_y + height_of_trapezium
+
+# Draw the trapezium
+ctx.move_to(top_left_x, top_left_y)  # Top left
+ctx.line_to(top_left_x + top_base_width, top_left_y)  # Top right
+ctx.line_to(bottom_left_x + bottom_base_width, bottom_left_y)  # Bottom right
+ctx.line_to(bottom_left_x, bottom_left_y)  # Bottom left
+ctx.close_path()
+
+# Fill the trapezium
+ctx.fill()
+
+
 # here is the bottom
 
 # Set the color for the house and roof (black)
@@ -97,7 +124,7 @@ ctx.set_source_rgb(0, 0, 0)
 
 # Draw the house body (rectangle)
 house_x = 100
-house_y = 1000
+house_y = 1100
 house_width = 1300
 house_height = 150
 ctx.rectangle(house_x, house_y, house_width, house_height)
