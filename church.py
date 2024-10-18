@@ -2,7 +2,7 @@ import cairo
 import math
 
 # Set up the surface and context
-width, height = 800, 1000  # Adjust height to make room for the full shape
+width, height = 1500, 1500  # Adjust height to make room for the full shape
 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
 ctx = cairo.Context(surface)
 
@@ -40,7 +40,7 @@ ctx.line_to(center_x - pedestal_bottom_width // 2, pedestal_top_y + pedestal_hei
 ctx.close_path()
 
 # Draw the top rectangle (smaller rectangle at the top)
-top_rect_width = 300
+top_rect_width = 500
 top_rect_height = 40
 ctx.rectangle((width - top_rect_width) / 2, 550, top_rect_width, top_rect_height)
 ctx.fill()
@@ -90,7 +90,51 @@ ctx.set_line_width(2)
 ctx.set_source_rgb(0, 0, 0)  # Outline color
 ctx.stroke()
 
+# here is the bottom
 
+# Set the color for the house and roof (black)
+ctx.set_source_rgb(0, 0, 0)
+
+# Draw the house body (rectangle)
+house_x = 100
+house_y = 1000
+house_width = 1300
+house_height = 150
+ctx.rectangle(house_x, house_y, house_width, house_height)
+ctx.fill()
+
+# Draw the roof (triangle)
+# ctx.move_to(house_x, house_y)  # Bottom-left corner of the roof (top of the house)
+# ctx.line_to(house_x + house_width, house_y)  # Bottom-right corner of the roof
+# ctx.line_to(house_x + house_width / 2, house_y - 100)  # Top vertex of the roof
+# ctx.close_path()  # Close the triangle path
+# ctx.fill()
+
+# Draw the windows (white rectangles)
+window_width = 50
+window_height = 50
+window_spacing = 20
+
+# Left window
+ctx.set_source_rgb(1, 1, 1)  # Set color to white for windows
+ctx.rectangle(house_x + window_spacing, house_y + window_spacing, window_width, window_height)
+ctx.fill()
+
+# Right window
+ctx.rectangle(house_x + window_spacing * 2 + window_width, house_y + window_spacing, window_width, window_height)
+ctx.fill()
+
+# 3. Draw the left side building (small rectangle)
+# side_building_width = 100
+# side_building_height = 100
+# ctx.rectangle(house_x - side_building_width, house_y + house_height - side_building_height, side_building_width, side_building_height)
+# ctx.fill()
+#
+# # Right side windows
+# ctx.rectangle(house_x + house_width + window_spacing, house_y + house_height - side_building_height + window_spacing, window_width, window_height)
+# ctx.fill()
+# ctx.rectangle(house_x + house_width + 2 * window_spacing + window_width, house_y + house_height - side_building_height + window_spacing, window_width, window_height)
+# ctx.fill()
 
 # Save the image to a file
 surface.write_to_png("church.png")
