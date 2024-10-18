@@ -2,7 +2,7 @@ import cairo
 import math
 
 # Set up the surface and context
-width, height = 500, 700  # Adjust height to make room for the full shape
+width, height = 800, 1000  # Adjust height to make room for the full shape
 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
 ctx = cairo.Context(surface)
 
@@ -27,9 +27,9 @@ ctx.rectangle(center_x - cross_width // 2, center_y - cross_width // 4, cross_wi
 ctx.fill()
 
 # Define points for the pedestal (tapered trapezoid)
-pedestal_top_width = 80
-pedestal_bottom_width = 200
-pedestal_height = 400
+pedestal_top_width = 50
+pedestal_bottom_width = 150
+pedestal_height = 320
 pedestal_top_y = center_y + cross_height // 2  # Start the pedestal below the cross
 
 # Draw the pedestal (trapezoid)
@@ -39,35 +39,22 @@ ctx.line_to(center_x + pedestal_bottom_width // 2, pedestal_top_y + pedestal_hei
 ctx.line_to(center_x - pedestal_bottom_width // 2, pedestal_top_y + pedestal_height)  # Bottom left
 ctx.close_path()
 
-
-# Set up the surface and context
-width, height = 500, 600  # Adjust dimensions for the shape
-surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
-ctx = cairo.Context(surface)
-
-# Set background color to white
-ctx.set_source_rgb(1, 1, 1)
-ctx.paint()
-
-# Set drawing color to black
-ctx.set_source_rgb(0, 0, 0)
-
 # Draw the top rectangle (smaller rectangle at the top)
 top_rect_width = 300
 top_rect_height = 40
-ctx.rectangle((width - top_rect_width) / 2, 50, top_rect_width, top_rect_height)
+ctx.rectangle((width - top_rect_width) / 2, 550, top_rect_width, top_rect_height)
 ctx.fill()
 
 # Draw the large bottom rectangle (the main body)
 bottom_rect_width = 400
 bottom_rect_height = 350
-ctx.rectangle((width - bottom_rect_width) / 2, 150, bottom_rect_width, bottom_rect_height)
+ctx.rectangle((width - bottom_rect_width) / 2, 600, bottom_rect_width, bottom_rect_height)
 ctx.fill()
 
 # Draw the arch (arched window in the center)
 arch_width = 150
 arch_height = 220
-center_x, center_y = width // 2, 300
+center_x, center_y = width // 2, 800
 
 # Draw the bottom part of the arched window (rectangle part)
 ctx.rectangle(center_x - arch_width // 2, center_y, arch_width, arch_height // 2)
@@ -80,6 +67,30 @@ ctx.fill()
 
 # Fill the pedestal
 ctx.fill()
+
+# Define the points for the trapezium
+x0, y0 = 150, 150  # Top-left point
+x1, y1 = 40, 150  # Top-right point
+x2, y2 = 400, 350  # Bottom-right point
+x3, y3 = 100, 350  # Bottom-left point
+
+# Start drawing the trapezium
+ctx.move_to(x0, y0)  # Move to top-left point
+ctx.line_to(x1, y1)  # Draw line to top-right point
+ctx.line_to(x2, y2)  # Draw line to bottom-right point
+ctx.line_to(x3, y3)  # Draw line to bottom-left point
+ctx.close_path()     # Close the shape (connect to top-left)
+
+
+# Fill the trapezium
+ctx.fill()
+
+# Optionally, you can stroke the outline of the trapezium
+ctx.set_line_width(2)
+ctx.set_source_rgb(0, 0, 0)  # Outline color
+ctx.stroke()
+
+
 
 # Save the image to a file
 surface.write_to_png("church.png")
