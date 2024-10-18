@@ -57,6 +57,6 @@ context.close_path()
 context.fill()
 
 # Save the image
-surface.write_to_png("output/2DHouse.png")
+surface.write_to_png("2DHouse.png")
 
 print("Black filled cross image saved as 2DHouse.png")
